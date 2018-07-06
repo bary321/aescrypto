@@ -48,6 +48,12 @@ func AesDecrypt(crypted, key []byte) ([]byte, error) {
 }
 
 func Base64AesDecrypt(crypted string) ([]byte, error) {
+	defer func() {
+		if err := recover(); err != nil {
+			return
+		}
+	}()
+
 	key := []byte("f2c85e0140a47415")
 	r1, err:= base64.URLEncoding.DecodeString(crypted)
 	if err != nil {
